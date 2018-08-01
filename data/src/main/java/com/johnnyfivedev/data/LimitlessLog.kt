@@ -1,4 +1,4 @@
-package com.johnnyfivedev.stackoverflowarchitecturecomponents
+package com.johnnyfivedev.data
 
 import android.util.Log
 

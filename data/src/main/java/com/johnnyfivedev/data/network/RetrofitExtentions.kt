@@ -1,4 +1,4 @@
-package com.johnnyfivedev.stackoverflowarchitecturecomponents
+package com.johnnyfivedev.data.network
 
 import retrofit2.Call
 import retrofit2.Callback
