@@ -6,13 +6,13 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initDI()
+        //initDI()
     }
 
-    private fun initDI() {
+   /* private fun initDI() {
         return DaggerAppComponent
             .builder()
             .context(this)
             .build()
-    }
+    }*/
 }
