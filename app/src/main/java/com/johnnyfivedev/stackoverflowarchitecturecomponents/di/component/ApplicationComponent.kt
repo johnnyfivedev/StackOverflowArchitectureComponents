@@ -1,6 +1,7 @@
 package com.johnnyfivedev.stackoverflowarchitecturecomponents.di.component
 
 import android.content.Context
+import com.johnnyfivedev.stackoverflowarchitecturecomponents.MainActivity
 import com.johnnyfivedev.stackoverflowarchitecturecomponents.di.module.ApplicationModule
 import dagger.BindsInstance
 import dagger.Component
@@ -20,4 +21,6 @@ interface ApplicationComponent {
 
         fun build(): ApplicationComponent
     }
+
+    fun inject(mainActivity: MainActivity)
 }

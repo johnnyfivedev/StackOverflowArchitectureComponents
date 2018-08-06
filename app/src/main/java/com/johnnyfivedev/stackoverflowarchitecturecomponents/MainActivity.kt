@@ -1,6 +1,7 @@
 package com.johnnyfivedev.stackoverflowarchitecturecomponents
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.johnnyfivedev.data.repository.question.QuestionRepository
 import javax.inject.Inject
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        App.applicationComponent.inject(this)
         setContentView(R.layout.activity_main)
 
 
@@ -32,5 +34,10 @@ class MainActivity : AppCompatActivity() {
         }, {
             it.printStackTrace()
         })*/
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onPostCreate(savedInstanceState, persistentState)
+
     }
 }

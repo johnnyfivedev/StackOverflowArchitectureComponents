@@ -5,8 +5,8 @@ import android.content.Context
 import com.johnnyfivedev.core.provider.SchedulersProvider
 import com.johnnyfivedev.core.provider.SystemInfoProvider
 import com.johnnyfivedev.data.dao.QuestionDao
-import com.johnnyfivedev.data.network.QuestionsApi
 import com.johnnyfivedev.data.network.ApiFactory
+import com.johnnyfivedev.data.network.QuestionApi
 import com.johnnyfivedev.data.repository.question.QuestionRepository
 import com.johnnyfivedev.data.repository.question.QuestionRepositoryImpl
 import com.johnnyfivedev.stackoverflowarchitecturecomponents.provider.SchedulersProviderImpl
@@ -28,6 +28,10 @@ class ApplicationModule {
 
     @Provides
     @Singleton
+    internal fun provideQuestionApi(apiFactory: ApiFactory) = apiFactory.create(QuestionApi::class.java)
+
+    @Provides
+    @Singleton
     internal fun provideSchedulersProvider(): SchedulersProvider = SchedulersProviderImpl()
 
     @Provides
@@ -36,8 +40,9 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    internal fun provideAppDataBase(context: Context) =
-        Room.databaseBuilder(context, AppDatabaseImpl::class.java, AppDatabaseImpl.NAME).build()
+    internal fun provideAppDataBase(context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabaseImpl::class.java, AppDatabaseImpl.NAME).build()
+    }
 
     @Provides
     @Singleton
@@ -45,10 +50,10 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideQuestionsRepository(
+    fun provideQuestionRepository(
         schedulersProvider: SchedulersProvider,
         systemInfoProvider: SystemInfoProvider,
-        questionApi: QuestionsApi,
+        questionApi: QuestionApi,
         questionDao: QuestionDao
     ): QuestionRepository = QuestionRepositoryImpl(
         schedulersProvider,
