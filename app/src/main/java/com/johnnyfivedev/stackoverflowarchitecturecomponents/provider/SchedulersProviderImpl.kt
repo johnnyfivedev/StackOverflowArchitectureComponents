@@ -1,6 +1,6 @@
-package com.johnnyfivedev.core
+package com.johnnyfivedev.stackoverflowarchitecturecomponents.provider
 
-import com.rmr.arch.sample.core.providers.rx.SchedulersProvider
+import com.johnnyfivedev.core.provider.SchedulersProvider
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

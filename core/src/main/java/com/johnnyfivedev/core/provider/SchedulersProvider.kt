@@ -1,4 +1,4 @@
-package com.johnnyfivedev.core
+package com.johnnyfivedev.core.provider
 
 import io.reactivex.Scheduler
 

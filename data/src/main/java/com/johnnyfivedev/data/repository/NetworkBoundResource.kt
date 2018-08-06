@@ -1,5 +1,7 @@
 package com.johnnyfivedev.data.repository
 
+import com.johnnyfivedev.core.provider.SchedulersProvider
+import com.johnnyfivedev.core.provider.SystemInfoProvider
 import com.johnnyfivedev.data.Resource
 import io.reactivex.Flowable
 
@@ -11,20 +13,20 @@ abstract class NetworkBoundResource<ResultType, ResponseType>(
     val result: Flowable<Resource<ResultType>>
 
     init {
-        val localObservable = Flowable.defer {
-            getFromDb()
-                .subscribeOn(schedulers.computation())
+        val diskObservable = Flowable.defer {
+            loadFromDb()
+                .subscribeOn(schedulers.disk())
         }
 
-        val remoteObservable = Flowable.defer {
+        val networkObservable = Flowable.defer {
             createCall()
-                .subscribeOn(schedulers.io())
-                .observeOn(schedulers.computation())
+                .subscribeOn(schedulers.network())
+                .observeOn(schedulers.disk())
                 .map(this::processResponse)
                 .map(this::saveCallResult)
-                .flatMap { getFromDb() }
+                .flatMap { loadFromDb() }
         }
-        val observable = if (systemInfoProvider.hasNetwork()) remoteObservable else localObservable
+        val observable = if (systemInfoProvider.hasNetwork()) networkObservable else diskObservable
         result = observable.map<Resource<ResultType>> { Resource.Data(it) }
             .observeOn(schedulers.mainThread())
             .startWith(Resource.Loading())
@@ -36,5 +38,5 @@ abstract class NetworkBoundResource<ResultType, ResponseType>(
 
     protected abstract fun saveCallResult(source: ResultType)
 
-    protected abstract fun getFromDb(): Flowable<ResultType>
+    protected abstract fun loadFromDb(): Flowable<ResultType>
 }
