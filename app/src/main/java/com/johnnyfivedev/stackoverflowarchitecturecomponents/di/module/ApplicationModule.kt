@@ -18,9 +18,8 @@ import rmr.arch.sample.data.storage.db.AppDatabaseImpl
 import javax.inject.Singleton
 
 
-@Module
+@Module(includes = [ViewModelModule::class])
 class ApplicationModule {
-
 
     @Provides
     @Singleton
