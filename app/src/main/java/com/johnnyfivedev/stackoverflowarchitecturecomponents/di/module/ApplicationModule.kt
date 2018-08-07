@@ -11,6 +11,7 @@ import com.johnnyfivedev.data.repository.question.QuestionRepository
 import com.johnnyfivedev.data.repository.question.QuestionRepositoryImpl
 import com.johnnyfivedev.stackoverflowarchitecturecomponents.provider.SchedulersProviderImpl
 import com.johnnyfivedev.stackoverflowarchitecturecomponents.provider.SystemInfoProviderImpl
+import com.johnnyfivedev.stackoverflowarchitecturecomponents.ui.adapter.QuestionsAdapter
 import dagger.Module
 import dagger.Provides
 import rmr.arch.sample.data.storage.db.AppDatabase
@@ -47,8 +48,8 @@ class ApplicationModule {
     @Singleton
     internal fun provideQuestionDao(appDatabase: AppDatabase) = appDatabase.getQuestionDao()
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideQuestionRepository(
         schedulersProvider: SchedulersProvider,
         systemInfoProvider: SystemInfoProvider,
@@ -60,4 +61,9 @@ class ApplicationModule {
         questionApi,
         questionDao
     )
+
+    @Provides
+    @Singleton
+    fun provideQuestionAdapter(context: Context) = QuestionsAdapter(context)
+
 }
