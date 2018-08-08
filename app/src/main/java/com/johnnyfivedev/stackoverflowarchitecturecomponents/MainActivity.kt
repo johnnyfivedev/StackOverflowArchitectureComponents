@@ -17,6 +17,7 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var questionRepository: QuestionRepository
 
+    // todo create module for questions dependencies
     @Inject
     lateinit var questionsAdapter: QuestionsAdapter
 
@@ -36,8 +37,6 @@ class MainActivity : BaseActivity() {
         when (resource) {
             // todo show preloader
             is Resource.Loading -> showMessage("loading")
-            //todo show list of data
-            //is Resource.Data -> updateUserData(resource.data)
             is Resource.Data -> {
                 questionsAdapter.swapItems(resource.data)
             }

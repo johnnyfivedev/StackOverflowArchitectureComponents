@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.list_item_question.view.tv_question_title
 class QuestionsAdapter(val context: Context) : BaseAdapter<Question, QuestionsAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item_question, parent,false))
+        ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item_question, parent, false))
 
 
     override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
