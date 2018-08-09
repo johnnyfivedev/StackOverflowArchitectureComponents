@@ -8,7 +8,10 @@ import com.johnnyfivedev.data.repository.question.QuestionRepository
 import com.johnnyfivedev.stackoverflowarchitecturecomponents.ui.activity.BaseActivity
 import com.johnnyfivedev.stackoverflowarchitecturecomponents.ui.adapter.QuestionsAdapter
 import com.johnnyfivedev.stackoverflowarchitecturecomponents.ui.questions.QuestionViewModel
+import com.johnnyfivedev.stackoverflowarchitecturecomponents.ui.widget.gone
+import com.johnnyfivedev.stackoverflowarchitecturecomponents.ui.widget.visible
 import kotlinx.android.synthetic.main.activity_main.rv_questions
+import kotlinx.android.synthetic.main.activity_main.shadow_preloader
 import javax.inject.Inject
 
 
@@ -35,9 +38,11 @@ class MainActivity : BaseActivity() {
 
     private fun onQuestionsChanged(resource: Resource<List<Question>>) {
         when (resource) {
-            // todo show preloader
-            is Resource.Loading -> showMessage("loading")
+            is Resource.Loading -> {
+                shadow_preloader.visible()
+            }
             is Resource.Data -> {
+                shadow_preloader.gone()
                 questionsAdapter.swapItems(resource.data)
             }
         }

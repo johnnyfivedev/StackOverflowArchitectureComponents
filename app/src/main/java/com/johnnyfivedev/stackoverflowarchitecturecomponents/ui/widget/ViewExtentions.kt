@@ -12,3 +12,11 @@ fun Context.getColorById(@ColorRes id: Int): Int {
 fun View.getColor(@ColorRes id: Int): Int {
     return ContextCompat.getColor(this.context, id)
 }
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.gone() {
+    this.visibility = View.GONE
+}

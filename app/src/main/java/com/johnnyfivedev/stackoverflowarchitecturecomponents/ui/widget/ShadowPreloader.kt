@@ -3,9 +3,8 @@ package com.johnnyfivedev.stackoverflowarchitecturecomponents.ui.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import com.johnnyfivedev.stackoverflowarchitecturecomponents.R
 
@@ -22,7 +21,7 @@ class ShadowPreloader @JvmOverloads constructor(
 
         val progressBar = ProgressBar(context)
 
-        val params = LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+        val params:FrameLayout.LayoutParams = FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         params.gravity = Gravity.CENTER
         progressBar.setLayoutParams(params)
 
